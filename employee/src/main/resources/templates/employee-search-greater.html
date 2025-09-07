@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Search Employees by Salary Greater Than</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 60%;
+    }
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Search Employees by Salary Greater Than</h2>
+
+<form th:action="@{/employees/searchBySalGreater}" method="get">
+  <label for="sal">Enter Minimum Salary:</label>
+  <input type="number" id="sal" name="sal" placeholder="Enter salary" required>
+  <button type="submit">Search</button>
+</form>
+
+<div th:if="${employees != null}">
+  <h3 th:text="'Employees with Salary greater than ' + ${sal}"></h3>
+
+  <table th:if="${!employees.isEmpty()}">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Salary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp : ${employees}">
+      <td th:text="${emp.id}"></td>
+      <td th:text="${emp.name}"></td>
+      <td th:text ="${emp.designation}"></td>
+      <td th:text="${emp.sal}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p th:if="${employees.isEmpty()}">No employees found with salary greater than this value.</p>
+</div>
+
+</body>
+</html>

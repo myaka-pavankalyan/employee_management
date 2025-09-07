@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+  <meta charset="UTF-8">
+  <title>StudentManagementSystem</title>
+  <link href=”https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css” rel=”stylesheet” integrity=”sha384-rGc5a4CZNrDyZM96D/AJLHaaLgMQp8rCw+3Mi6lO2eNg6bPqfgJInQFnZlA1a11K” crossorigin=”anonymous”>
+</head>
+<body>
+<div align="centre" class="container">
+  <a th:href="@{/addnew}"> Add</a><br></br>
+  <a th:href="@{/search}">Search Employee</a><br></br>
+  <a th:href="@{/employees/searchBySalGreater}">Search Employee</a><br></br>
+  <table border="5" class="styled-table">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>Designation</th>
+      <th>Salary</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee:${employees}">
+      <td th:text="${employee.id}"></td>
+      <td th:text="${employee.name}"></td>
+      <td th:text="${employee.designation}"></td>
+      <td th:text="${employee.sal}"></td>
+      <td><a th:href="@{/delete/{id}(id=${employee.id})}">Delete</a>
+        <a th:href="@{/update/{id}(id=${employee.id})}">Update</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
